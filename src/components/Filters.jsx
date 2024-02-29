@@ -13,7 +13,7 @@ export const Filters = ({ setPositions }) => {
   function search() {
     setPositions(null);
     try {
-      fetch("http://api.valantis.store:40000/", {
+      fetch("https://api.valantis.store:41000/", {
         method: "post",
         headers: {
           "Content-type": "application/json",

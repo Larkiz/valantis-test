@@ -6,7 +6,7 @@ export function fetchIds(ids) {
       ? { action: "get_items", params: { ids: ids } }
       : { action: "get_items" };
 
-  return fetch("http://api.valantis.store:40000/", {
+  return fetch("https://api.valantis.store:41000/", {
     method: "post",
     headers: {
       "Content-type": "application/json",

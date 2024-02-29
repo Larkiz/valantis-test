@@ -4,7 +4,7 @@ import apiPassword from "../../password";
 export const BrandPick = ({ filter }) => {
   const [brands, setBrands] = useState(null);
   function fetchBrand() {
-    fetch("http://api.valantis.store:40000/", {
+    fetch("https://api.valantis.store:41000/", {
       method: "post",
       headers: {
         "Content-type": "application/json",
