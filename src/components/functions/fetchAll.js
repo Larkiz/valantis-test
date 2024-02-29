@@ -1,17 +1,14 @@
-import md5 from "md5";
+import apiPassword from "../../password";
 import { fetchIds } from "./fetchIds";
 
-const timeStamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-const password = md5(`Valantis_${timeStamp}`);
-
 export function getPositions(setPositions) {
-  try {
+  function first() {
     // первые 50
     fetch("http://api.valantis.store:40000/", {
       method: "post",
       headers: {
         "Content-type": "application/json",
-        "X-Auth": password,
+        "X-Auth": apiPassword,
       },
       body: JSON.stringify({
         action: "get_ids",
@@ -30,12 +27,14 @@ export function getPositions(setPositions) {
           setPositions(unique);
         });
       });
+  }
+  function all() {
     // все
     fetch("http://api.valantis.store:40000/", {
       method: "post",
       headers: {
         "Content-type": "application/json",
-        "X-Auth": password,
+        "X-Auth": apiPassword,
       },
       body: JSON.stringify({
         action: "get_ids",
@@ -53,8 +52,17 @@ export function getPositions(setPositions) {
           setPositions(unique);
         });
       });
+  }
+  try {
+    first();
   } catch (err) {
     console.log(err);
-    getPositions(setPositions);
+    first();
+  }
+  try {
+    all();
+  } catch (err) {
+    console.log(err);
+    all();
   }
 }

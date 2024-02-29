@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -24,12 +23,14 @@ function App() {
             return <Position key={j} data={item} />;
           })}
       </div>
-      {positions && (
+      {positions ? (
         <Pagination
           offset={offset}
           setOffset={setOffset}
           positions={positions}
         />
+      ) : (
+        <h2>Загрузка</h2>
       )}
     </>
   );

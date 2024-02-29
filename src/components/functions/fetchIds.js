@@ -1,7 +1,4 @@
-import md5 from "md5";
-
-const timeStamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-const password = md5(`Valantis_${timeStamp}`);
+import apiPassword from "../../password";
 
 export function fetchIds(ids) {
   const params =
@@ -13,7 +10,7 @@ export function fetchIds(ids) {
     method: "post",
     headers: {
       "Content-type": "application/json",
-      "X-Auth": password,
+      "X-Auth": apiPassword,
     },
     body: JSON.stringify(params),
   }).then((res) => {

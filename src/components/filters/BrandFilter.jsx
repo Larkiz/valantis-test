@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import md5 from "md5";
-const timeStamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-const password = md5(`Valantis_${timeStamp}`);
+import apiPassword from "../../password";
 
 export const BrandPick = ({ filter }) => {
   const [brands, setBrands] = useState(null);
-  useEffect(() => {
+  function fetchBrand() {
     fetch("http://api.valantis.store:40000/", {
       method: "post",
       headers: {
         "Content-type": "application/json",
-        "X-Auth": password,
+        "X-Auth": apiPassword,
       },
       body: JSON.stringify({
         action: "get_fields",
@@ -29,6 +27,13 @@ export const BrandPick = ({ filter }) => {
 
         setBrands(filtered);
       });
+  }
+  useEffect(() => {
+    try {
+      fetchBrand();
+    } catch (err) {
+      fetchBrand();
+    }
   }, []);
 
   function changeBrand(e) {

@@ -3,21 +3,21 @@ import { BrandPick } from "./filters/BrandFilter";
 import { NameFilter } from "./filters/NameFilter";
 import { PriceFilter } from "./filters/PriceFilter";
 
-import md5 from "md5";
 import { fetchIds } from "./functions/fetchIds";
-const timeStamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-const password = md5(`Valantis_${timeStamp}`);
+
+import apiPassword from "../password";
 
 export const Filters = ({ setPositions }) => {
   const [filters, setFilters] = useState();
-  console.log(filters);
+
   function search() {
+    setPositions(null);
     try {
       fetch("http://api.valantis.store:40000/", {
         method: "post",
         headers: {
           "Content-type": "application/json",
-          "X-Auth": password,
+          "X-Auth": apiPassword,
         },
         body: JSON.stringify({
           action: "filter",

@@ -9,7 +9,7 @@ export const Pagination = ({ offset, setOffset, positions }) => {
     setOffset(page);
   }
   function next() {
-    if (Math.floor(offset / 50) <= Math.floor(positions.length / 50))
+    if (Math.ceil(offset / 50) < Math.floor(positions.length / 50))
       setOffset(offset + 50);
   }
   function prev() {
